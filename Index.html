@@ -1,1 +1,926 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#160d09">
+<title>Rhayssa Gabrielly | Caminhos de Clareza</title>
 
+<style>
+:root {
+  --night: #160d09;
+  --gold: #c8955b;
+  --gold2: #efd1a0;
+  --cream: #ead7bd;
+  --ink: #2b1a12;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--night);
+  color: #f4e8d6;
+  font-family: Georgia, "Times New Roman", serif;
+  overflow-x: hidden;
+}
+
+button, a { font: inherit; }
+button { cursor: pointer; }
+
+/* TELA INICIAL */
+
+#intro {
+  min-height: 100svh;
+  position: relative;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 30px 20px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 48%, #804a352b, transparent 45%),
+    linear-gradient(145deg, #2b1b12, #120a07 65%, #21130d);
+}
+
+#intro::before {
+  content: "";
+  position: absolute;
+  inset: 15px;
+  border: 1px solid #c8955b66;
+  pointer-events: none;
+}
+
+.intro-scene {
+  position: absolute;
+  inset: -12px;
+  filter: blur(8px);
+  transform: scale(1.05);
+  opacity: .75;
+  transition: 1.5s ease;
+  pointer-events: none;
+}
+
+body.awake .intro-scene {
+  filter: blur(0);
+  transform: scale(1);
+  opacity: 1;
+}
+
+.intro-scene svg {
+  width: 100%;
+  height: 100%;
+}
+
+.intro-content {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  transition: opacity .7s, transform .7s;
+}
+
+.eyebrow {
+  color: var(--gold);
+  font: 11px Arial, sans-serif;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  line-height: 1.8;
+}
+
+h1 {
+  color: var(--gold2);
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  font-weight: normal;
+  line-height: 1.05;
+  margin: 18px 0;
+}
+
+.intro-sub {
+  color: #d6b995;
+  line-height: 1.8;
+  margin: 20px auto 30px;
+}
+
+.gold-button {
+  padding: 16px 28px;
+  border: 1px solid #e0b47b;
+  background: linear-gradient(135deg, #edcea0, #b98249);
+  color: #24140c;
+  font: 600 11px Arial, sans-serif;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  transition: .3s;
+}
+
+.gold-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 35px #c8955b55;
+}
+
+.small-note {
+  color: #b99a78;
+  font: 10px Arial, sans-serif;
+  letter-spacing: .15em;
+  margin-top: 22px;
+}
+
+#intro.entered .intro-content {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+}
+
+#intro.entered {
+  min-height: 0;
+  height: 0;
+  padding: 0;
+  transition: height 1s, min-height 1s, padding 1s;
+}
+
+/* CENÁRIO E ÁRVORE */
+
+#experience {
+  display: none;
+  min-height: 100vh;
+}
+
+body.awake #experience {
+  display: block;
+}
+
+#tree-stage {
+  position: relative;
+  height: 760px;
+  max-height: 90svh;
+  min-height: 560px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 70%, #9d5b412b, transparent 48%),
+    linear-gradient(#170d09, #21130d 70%, #160d09);
+}
+
+.stage-stars {
+  position: absolute;
+  inset: 0;
+  opacity: .35;
+  background-image:
+    radial-gradient(#e7bd80 1px, transparent 2px),
+    radial-gradient(#d39b5a 1px, transparent 2px);
+  background-size: 90px 100px, 135px 125px;
+  animation: stars 4s ease-in-out infinite alternate;
+}
+
+@keyframes stars {
+  from { opacity: .15; }
+  to { opacity: .5; }
+}
+
+.moon-ring {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(78vw, 530px);
+  aspect-ratio: 1;
+  border: 1px solid #c8955b55;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 9px #c8955b0d,
+    0 0 0 20px #c8955b08;
+}
+
+.moon-ring::before {
+  content: "☾  ·  ☽  ·  ☾  ·  ☽";
+  position: absolute;
+  top: -18px;
+  width: 100%;
+  text-align: center;
+  color: var(--gold);
+  letter-spacing: .5em;
+}
+
+.tree-caption {
+  position: absolute;
+  top: 5%;
+  width: 100%;
+  text-align: center;
+  color: var(--gold);
+  font: 10px Arial, sans-serif;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+}
+
+.tree-wrap {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(90vw, 650px);
+  height: 88%;
+}
+
+#treeSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.tree-line {
+  fill: none;
+  stroke: #d6a05e;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 4px #d99e55a0);
+  stroke-dasharray: var(--len, 900);
+  stroke-dashoffset: var(--len, 900);
+}
+
+body.awake .tree-line {
+  animation: drawTree 2s ease-out forwards;
+}
+
+@keyframes drawTree {
+  to { stroke-dashoffset: 0; }
+}
+
+.leaf {
+  fill: #d6a05e;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+body.awake .leaf {
+  animation: leafIn .7s ease forwards;
+}
+
+@keyframes leafIn {
+  to { opacity: .95; transform: scale(1); }
+}
+
+.ground-glow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100px;
+  background: radial-gradient(ellipse, #c8955b2b, transparent 70%);
+}
+
+/* RAÍZES PROFUNDAS */
+
+#roots-zone {
+  position: relative;
+  min-height: 520px;
+  margin-top: -20px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, #160d09, #21140e 45%, #1b100b);
+}
+
+#rootsSvg {
+  display: block;
+  width: 100%;
+  height: 520px;
+}
+
+.root-line {
+  fill: none;
+  stroke: #c8955b;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 4px #c8955b80);
+  stroke-dasharray: var(--len, 500);
+  stroke-dashoffset: var(--len, 500);
+}
+
+body.awake .root-line {
+  animation: growRoot 2.3s cubic-bezier(.2, .65, .25, 1) forwards;
+}
+
+@keyframes growRoot {
+  to { stroke-dashoffset: 0; }
+}
+
+.root-caption {
+  text-align: center;
+  color: #b98a56;
+  font: 10px Arial, sans-serif;
+  letter-spacing: .23em;
+  text-transform: uppercase;
+  margin: 0 0 45px;
+  opacity: 0;
+  transition: opacity .8s;
+}
+
+body.awake .root-caption {
+  opacity: 1;
+  transition-delay: 1.8s;
+}
+
+/* CATÁLOGO */
+
+#catalog {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 20px 20px 75px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s, transform 1s;
+}
+
+body.catalog-ready #catalog {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.catalog-heading {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.catalog-heading h2 {
+  color: var(--gold2);
+  font-weight: normal;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin: 10px 0;
+}
+
+.heading-flourish {
+  color: var(--gold);
+  letter-spacing: .5em;
+  margin-top: 15px;
+}
+
+/* CARROSSEL DE CATEGORIAS */
+
+.service-carousel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.carousel-window {
+  overflow: hidden;
+  flex: 1;
+  min-width: 0;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 12px;
+  transition: transform .4s ease;
+  touch-action: pan-y;
+}
+
+.category-card {
+  flex: 0 0 clamp(145px, 32%, 230px);
+  min-height: 115px;
+  border: 1px solid #8f633c;
+  background: #21140e;
+  color: #e9d3b3;
+  padding: 16px 12px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: opacity .4s, transform .4s, background .3s;
+}
+
+.category-card span {
+  font-size: 22px;
+  color: var(--gold);
+}
+
+.category-card strong {
+  font-weight: normal;
+  font-size: 15px;
+  color: #f0d4a6;
+}
+
+.category-card small {
+  font: 10px Arial, sans-serif;
+  color: #bda184;
+}
+
+.category-card:not(.active) {
+  opacity: .45;
+}
+
+.category-card.active {
+  opacity: 1;
+  background: #382316;
+  transform: translateY(-3px);
+  box-shadow: inset 0 0 0 1px #d2a16b;
+}
+
+.carousel-arrow {
+  flex: 0 0 35px;
+  height: 42px;
+  background: transparent;
+  border: 1px solid #9c7045;
+  color: #e8c99d;
+  font-size: 25px;
+}
+
+.service-panel {
+  background: var(--cream);
+  color: var(--ink);
+  border: 1px solid var(--gold);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 70px #0005;
+}
+
+.service-row {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 100px;
+  gap: 12px;
+  align-items: center;
+  padding: 13px 18px;
+  min-height: 62px;
+  border-bottom: 1px solid #b99b7d;
+  transition: opacity .35s, transform .35s, background .2s;
+}
+
+.service-row:last-child {
+  border-bottom: 0;
+}
+
+.service-row:hover {
+  background: #f5e7d2;
+}
+
+.service-row.fading {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.service-icon {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #24150e;
+  color: #e4bd83;
+  font-size: 19px;
+}
+
+.service-name {
+  font-size: clamp(.9rem, 2.2vw, 1.15rem);
+  line-height: 1.3;
+}
+
+.service-price {
+  text-align: right;
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+
+.catalog-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 25px 0;
+}
+
+.dark-button {
+  background: transparent;
+  color: var(--gold2);
+  border: 1px solid #b9844e;
+  padding: 13px 18px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font: 11px Arial, sans-serif;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+}
+
+.dark-button:hover {
+  background: #b9844e22;
+}
+
+/* PAGAMENTO E INFORMAÇÕES */
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid #9c7045;
+  border-radius: 18px;
+  overflow: hidden;
+  margin-top: 35px;
+}
+
+.info-box {
+  padding: 25px;
+  background: #1d110c;
+}
+
+.info-box + .info-box {
+  border-left: 1px solid #9c7045;
+}
+
+.info-box h3 {
+  font-size: 1rem;
+  font-weight: normal;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.info-box p {
+  color: #d8c2a7;
+  line-height: 1.7;
+}
+
+.pix {
+  font-size: 1.25rem;
+  color: var(--gold2);
+  user-select: all;
+}
+
+footer {
+  text-align: center;
+  border-top: 1px solid #4c3322;
+  padding: 35px 20px;
+  color: #b48a5b;
+}
+
+footer .brand {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  color: var(--gold);
+}
+
+footer p {
+  font: 10px Arial, sans-serif;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  #tree-stage {
+    min-height: 470px;
+    height: 68svh;
+  }
+
+  .tree-wrap {
+    width: 100vw;
+    height: 86%;
+    top: 7%;
+  }
+
+  #roots-zone {
+    min-height: 360px;
+  }
+
+  #rootsSvg {
+    height: 360px;
+  }
+
+  #catalog {
+    padding: 10px 12px 45px;
+  }
+
+  .category-card {
+    flex-basis: 145px;
+  }
+
+  .service-carousel {
+    gap: 5px;
+  }
+
+  .carousel-arrow {
+    flex-basis: 28px;
+  }
+
+  .service-row {
+    grid-template-columns: 35px minmax(0, 1fr) 75px;
+    gap: 8px;
+    padding: 11px 9px;
+  }
+
+  .service-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+
+  .service-name {
+    font-size: .9rem;
+  }
+
+  .service-price {
+    font-size: .9rem;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .info-box + .info-box {
+    border-left: 0;
+    border-top: 1px solid #9c7045;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<section id="intro">
+  <div class="intro-scene" aria-hidden="true">
+    <svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="mist">
+          <stop stop-color="#9a6438" stop-opacity=".3"/>
+          <stop offset="1" stop-color="#160d09" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="1200" height="900" fill="url(#mist)"/>
+      <g fill="none" stroke="#c8955b" stroke-width="1" opacity=".38">
+        <circle cx="600" cy="390" r="210"/>
+        <circle cx="600" cy="390" r="230"/>
+        <path d="M600 125V80m-20 25 20-25 20 25"/>
+        <path d="M120 730 Q300 590 470 730 T850 730 T1180 690"/>
+        <path d="M80 780 Q250 660 410 780 T760 780 T1150 760"/>
+      </g>
+      <circle cx="600" cy="150" r="44" fill="#d7a96f" opacity=".18"/>
+      <g fill="#e1b77d" opacity=".7">
+        <circle cx="180" cy="180" r="2"/>
+        <circle cx="1000" cy="230" r="2"/>
+        <circle cx="900" cy="130" r="2"/>
+        <circle cx="300" cy="340" r="1.5"/>
+        <circle cx="750" cy="290" r="1.5"/>
+        <circle cx="430" cy="170" r="2"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="intro-content">
+    <div class="eyebrow">Um convite para olhar além</div>
+    <h1>Rhayssa Gabrielly</h1>
+    <div class="intro-sub">
+      Cartomante · Professora holística · Terapeuta xamânica
+    </div>
+    <button class="gold-button" id="enterButton">
+      Iniciar a experiência ✦
+    </button>
+    <div class="small-note">RESPIRA · SINTA · DESCUBRA</div>
+  </div>
+</section>
+
+<main id="experience">
+
+  <section id="tree-stage">
+    <div class="stage-stars"></div>
+    <div class="moon-ring"></div>
+    <div class="tree-caption">Raízes que revelam caminhos</div>
+
+    <div class="tree-wrap">
+      <svg id="treeSvg" viewBox="0 0 500 620">
+        <g id="treeBranches"></g>
+        <g id="treeLeaves"></g>
+      </svg>
+    </div>
+
+    <div class="ground-glow"></div>
+  </section>
+
+  <section id="roots-zone">
+    <svg id="rootsSvg" viewBox="0 0 1000 520"
+         preserveAspectRatio="none"></svg>
+    <div class="root-caption">Cada raiz revela um caminho</div>
+  </section>
+
+  <section id="catalog">
+    <div class="catalog-heading">
+      <div class="eyebrow">Encontre o atendimento para o seu momento</div>
+      <h2>Catálogo de serviços</h2>
+      <div class="heading-flourish">✦ ── ◉ ── ✦</div>
+    </div>
+
+    <div class="service-carousel" aria-label="Categorias de atendimento">
+      <button class="carousel-arrow" id="prevCategory" aria-label="Anterior">‹</button>
+
+      <div class="carousel-window" id="carouselWindow">
+        <div class="carousel-track" id="carouselTrack">
+          <button class="category-card active" data-category="all">
+            <span>✧</span><strong>Todos</strong>
+            <small>Catálogo completo</small>
+          </button>
+
+          <button class="category-card" data-category="quick">
+            <span>☾</span><strong>Consultas rápidas</strong>
+            <small>Perguntas e conselhos</small>
+          </button>
+
+          <button class="category-card" data-category="readings">
+            <span>✦</span><strong>Leituras</strong>
+            <small>Amor, mês e ano</small>
+          </button>
+
+          <button class="category-card" data-category="deep">
+            <span>♧</span><strong>Jornadas profundas</strong>
+            <small>Acompanhamentos</small>
+          </button>
+        </div>
+      </div>
+
+      <button class="carousel-arrow" id="nextCategory" aria-label="Próxima">›</button>
+    </div>
+
+    <div class="service-panel" id="servicePanel"></div>
+
+    <div class="catalog-actions">
+      <a class="dark-button"
+         href="https://wa.me/5534992651229?text=Ol%C3%A1%2C%20Rhayssa!%20Gostaria%20de%20saber%20sobre%20os%20atendimentos."
+         target="_blank" rel="noopener">
+        Solicitar atendimento
+      </a>
+      <a class="dark-button" href="#informacoes">Formas de pagamento</a>
+    </div>
+
+    <section class="info-grid" id="informacoes">
+      <div class="info-box">
+        <h3>✦ Formas de pagamento</h3>
+        <p>PIX</p>
+        <p class="pix">34992651229</p>
+        <p>Link de pagamento para cartão de crédito. Solicite no atendimento.</p>
+        <button class="dark-button" id="copyPix">Copiar chave PIX</button>
+        <p id="copyMessage" aria-live="polite"></p>
+      </div>
+
+      <div class="info-box">
+        <h3>♡ Informações importantes</h3>
+        <p>✦ Os atendimentos são realizados com hora marcada.</p>
+        <p>✦ Os horários dependem da disponibilidade da agenda.</p>
+        <p>✦ As informações do atendimento serão enviadas após o agendamento.</p>
+      </div>
+    </section>
+  </section>
+
+  <footer>
+    <div class="brand">Rhayssa Gabrielly</div>
+    <p>Cartomante e terapeuta</p>
+    <div>✧ Que seus caminhos encontrem clareza ✧</div>
+  </footer>
+</main>
+
+<script>
+const services = [
+  ["✦","Conselho espiritual","60,00","quick"],
+  ["⌕","Caso investigação","70,00","quick"],
+  ["?","Pergunta objetiva","15,00","quick"],
+  ["☏","Conselho","20,00","quick"],
+  ["⌛","Leitura Clareza 30m","47,00","readings"],
+  ["❋","Leitura padrões emocionais","70,00","deep"],
+  ["♡","Leitura do amor","70,00","readings"],
+  ["▦","Leitura do mês","85,00","readings"],
+  ["▦","Leitura do trimestre","95,00","readings"],
+  ["☼","Leitura do ano","120,00","readings"],
+  ["♛","Mesa real leitura completa","167,00","readings"],
+  ["◉","Leituras ao vivo — experiência individual","120,00","readings"],
+  ["✧","Travessia — acompanhamento online de clareza emocional (30 dias)","450,00","deep"],
+  ["♧","Círculo de travessia (encontros presenciais)","190,00","deep"]
+];
+
+const panel = document.getElementById("servicePanel");
+
+function renderServices(category) {
+  panel.innerHTML = "";
+
+  const filtered = category === "all"
+    ? services
+    : services.filter(service => service[3] === category);
+
+  filtered.forEach(([icon, name, price]) => {
+    const row = document.createElement("div");
+    row.className = "service-row";
+
+    const symbol = document.createElement("span");
+    symbol.className = "service-icon";
+    symbol.textContent = icon;
+
+    const title = document.createElement("span");
+    title.className = "service-name";
+    title.textContent = name;
+
+    const amount = document.createElement("span");
+    amount.className = "service-price";
+    amount.textContent = "R$ " + price;
+
+    row.append(symbol, title, amount);
+    panel.appendChild(row);
+  });
+}
+
+renderServices("all");
+
+/* CARROSSEL: ao trocar de categoria, os serviços antigos
+   ficam opacos e somem antes da nova categoria aparecer. */
+
+const cards = [...document.querySelectorAll(".category-card")];
+const track = document.getElementById("carouselTrack");
+const windowBox = document.getElementById("carouselWindow");
+let activeIndex = 0;
+let swipeStart = 0;
+
+function selectCategory(index) {
+  activeIndex = (index + cards.length) % cards.length;
+
+  cards.forEach((card, i) => {
+    card.classList.toggle("active", i === activeIndex);
+  });
+
+  const card = cards[activeIndex];
+  const maxScroll = Math.max(0, track.scrollWidth - windowBox.clientWidth);
+  const target = card.offsetLeft - 6;
+
+  track.style.transform =
+    `translateX(-${Math.min(Math.max(0, target), maxScroll)}px)`;
+
+  panel.querySelectorAll(".service-row").forEach(row => {
+    row.classList.add("fading");
+  });
+
+  window.setTimeout(() => {
+    renderServices(card.dataset.category);
+  }, 260);
+}
+
+cards.forEach((card, index) => {
+  card.addEventListener("click", () => selectCategory(index));
+});
+
+document.getElementById("prevCategory").addEventListener("click", () => {
+  selectCategory(activeIndex - 1);
+});
+
+document.getElementById("nextCategory").addEventListener("click", () => {
+  selectCategory(activeIndex + 1);
+});
+
+windowBox.addEventListener("touchstart", event => {
+  swipeStart = event.touches[0].clientX;
+}, { passive: true });
+
+windowBox.addEventListener("touchend", event => {
+  const difference = event.changedTouches[0].clientX - swipeStart;
+
+  if (Math.abs(difference) > 45) {
+    selectCategory(activeIndex + (difference < 0 ? 1 : -1));
+  }
+}, { passive: true });
+
+/* DESENHO DA ÁRVORE */
+
+function svgEl(tag, attrs = {}) {
+  const element = document.createElementNS(
+    "http://www.w3.org/2000/svg", tag
+  );
+
+  Object.entries(attrs).forEach(([key, value]) => {
+    element.setAttribute(key, value);
+  });
+
+  return element;
+}
+
+function addTreePath(path, index) {
+  const element = svgEl("path", {
+    d: path,
+    class: "tree-line",
+    style: `--len:${path.length * 5 + 100};animation-delay:${index * .06}s`
+  });
+
+  document.getElementById("treeBranches").appendChild(element);
+}
+
+function buildTree() {
+  const paths = [
+    "M250 585 C245 520 258 465 250 400 C246 340 250 275 250 210",
+    "M250 500 C215 475 190 435 170 390 C150 350 130 320 100 300",
+    "M250 470 C290 445 315 405 340 365 C360 325 390 295 420 275",
+    "M250 410 C210 380 195 345 200 305 C205 265 180 235 150 215",
+    "M250 365 C285 335 305 300 300 260 C295 225 320 195 350 175",
+    "M250 315 C225 285 220 250 230 220 C240 185 220 155 200 135",
+    "M250 285 C275 255 280 220 270 190 C260 160 285 130 310 110",
